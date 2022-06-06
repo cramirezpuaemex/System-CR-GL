@@ -1,0 +1,20 @@
+RMS 4 .10 2 3				/Residual weighting
+POS 1.78
+ZTR 5
+DIS 4 15 3.5 7
+* OUTPUT FORMAT
+ERF T					/Send error messages to terminal
+TOP F					/No page ejects
+LST 2 0 1				/station list or models in printfile
+KPR 2					/Medium print output each event
+H71 2 1 3				/Use hypo71 summary format for this test
+CRH 1 '/home/carlos/Escritorio/MagnitudPrueba/model_prueba.crh'
+STA '/home/carlos/Escritorio/hyp/codex/codex.sta'
+DEL '/home/carlos/Escritorio/hyp/codex/codex.del'
+PRT '/home/carlos/Dropbox/Implementacion_DOC/File_hyp/rcodex.prt'
+PHS '/home/carlos/Dropbox/Implementacion_DOC/File_hyp/codex.phs'
+SUM '/home/carlos/Dropbox/Implementacion_DOC/File_hyp/codex.sum'
+ARC '/home/carlos/Dropbox/Implementacion_DOC/File_hyp/codex.arc'
+FIL
+LOC
+STO
