@@ -125,7 +125,7 @@ class hyp_path():
 		self.root8 = Tk()
 		self.root8.geometry("400x200")
 		#self.root.config(width=300, height=100)
-		self.root8.title(" Select path catalogs of event seismic .SAC")
+		self.root8.title(" Select path of the files of phases")
 		#INPUT=""     
 
 		 

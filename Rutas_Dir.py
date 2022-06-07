@@ -15,6 +15,7 @@ class Rutas_Dir():
 		root4 = Tk()
 		file =  askdirectory(initialdir = "/home",title = Tipo)
 		root4.destroy()
+		print "file met Rutas_Dirs ", file
 		return file
 
 	

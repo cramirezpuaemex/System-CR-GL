@@ -12,6 +12,7 @@ class Rutas():
 		root4 = Tk()
 		filename =  askopenfilename(initialdir = "/home",title = tipo,filetypes = (("all files","*.*"),("all files","*.*")))
 		root4.destroy()
+		print "filename met rutas, ", filename
 		return filename
 #inicio=Rutas()
 #archivos=inicio.main()

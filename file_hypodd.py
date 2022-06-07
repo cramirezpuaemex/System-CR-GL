@@ -14,6 +14,7 @@ from station import *
 from In_Out_HypDD import *
 from data_times_hyp import *
 from files_ct_cc_hypdd import *
+from Principal import *
 class file_hypodd():
 
 	def menu(self, name):
@@ -40,16 +41,16 @@ class file_hypodd():
 		 
 		self.Display = Button(self.root2, height = 2,
 		                 width = 40,
-		                 text ="1.- Create file of settings(inp)",
+		                 text ="6.- Create file of settings(inp)",
 		                 command = lambda:self.settings())
 
 		self.Display2 = Button(self.root2, height = 2,
 		                 width = 40,
-		                 text ="2.- Create file to dat (.dat)",
+		                 text ="1.- Create file to dat (.dat)",
 		                 command = lambda:self.file_data())
 		self.Display3 = Button(self.root2, height = 2,
 		                 width = 40,
-		                 text ="3.- Create file to station(.sta)",
+		                 text ="2.- Create file to station(.sta)",
 		                 command = lambda:self.station())		
 		#self.Display4 = Button(self.root2, height = 2,
 		                 #width = 40,
@@ -57,15 +58,15 @@ class file_hypodd():
 		                 #command = lambda:self.station())
 		self.Display5 = Button(self.root2, height = 2,
 		                 width = 40,
-		                 text ="4.- Create file of data times",
+		                 text ="3.- Create file of data times",
 		                 command = lambda:self.data_times())
 		self.Display6 = Button(self.root2, height = 2,
 		                 width = 40,
-		                 text ="5.- Create file dt.ct",
+		                 text ="4.- Create file dt.ct",
 		                 command = lambda:self.files_ct())
 		self.Display7 = Button(self.root2, height = 2,
 		                 width = 40,
-		                 text ="6.- Create file dt.cc",
+		                 text ="5.- Create file dt.cc",
 		                 command = lambda:self.files_cc())
 
 		self.Display1 = Button(self.root2, height = 2,
@@ -78,7 +79,7 @@ class file_hypodd():
 		                 command = lambda:self.salir())
 
 		#self.inputtxt.pack()
-		self.Display.pack()
+		
 		
 		self.Display2.pack()
 		self.Display3.pack()
@@ -86,15 +87,19 @@ class file_hypodd():
 		self.Display5.pack()
 		self.Display6.pack()
 		self.Display7.pack()
-		self.Display1.pack()		
+		self.Display.pack()	
+		self.Display1.pack()
+			
 		self.Display8.pack()
 		mainloop()
 
 	def settings(self):
 		print ':)  ******* settings'
 		print "inp"
-		self.create_file()
+
 		self.root2.destroy()
+		self.create_file()
+		
 		messagebox.showinfo(message="process completed successfully", title="Message")
 		self.menu(self.INPUT)
 
@@ -102,8 +107,9 @@ class file_hypodd():
 	def HypoDD(self):
 		print ':)  ******* HypoDD'
 		print "loc"
-		self.Software_hypoDD()
 		self.root2.destroy()
+		self.Software_hypoDD()
+		
 		messagebox.showinfo(message="process completed successfully", title="Message")
 		self.menu(self.INPUT)
 
@@ -111,12 +117,13 @@ class file_hypodd():
 
 	def file_data(self):
 		print ':)  ******* file_data'
+		self.root2.destroy()
 		inicio_data_dat=File_Data_hypDD()
 		inicio_ruta=Rutas()
 		Tipo="File with localization"
 		path_loca=inicio_ruta.main(Tipo)
 		inicio_data_dat.main(path_loca,self.model)
-		self.root2.destroy()
+		
 		messagebox.showinfo(message="process completed successfully", title="Message")
 		self.menu(self.INPUT)
 
@@ -151,19 +158,21 @@ class file_hypodd():
 		self.menu(self.INPUT)
 	def files_cc(self):
 		print ':)  ******* dt.cc'
+		self.root2.destroy()
 		inicio_in_out=In_Out_HypDD()
 
-		self.root2.destroy()
+		
 		messagebox.showinfo(message="process completed successfully", title="Message")
 		self.menu(self.INPUT)
 	def station(self):
 		print ':)  ******* station'
+		self.root2.destroy()
 		inicio_data_sta=station()
 		inicio_ruta=Rutas()
 		Tipo="File with station"
 		path_loca=inicio_ruta.main(Tipo)
 		inicio_data_sta.main(path_loca,self.model)
-		self.root2.destroy()
+		
 		messagebox.showinfo(message="process completed successfully", title="Message")
 		self.menu(self.INPUT)
 
@@ -171,6 +180,8 @@ class file_hypodd():
 	def salir(self):
 		#self.root = tk.Tk()
 		self.root2.destroy()
+		#iniciar=Principal()
+		#iniciar.main()
 
 	def Take_input(self):
 
@@ -278,6 +289,7 @@ class file_hypodd():
 	def Software_hypoDD(self):
 
 		print "Entra a la funcion de Software"
+		self.name_soft=(os.path.abspath(os.getcwd()))
 
 		#p=""
 		p = subprocess.Popen(['./hypoDD'],
@@ -287,47 +299,179 @@ class file_hypodd():
 
 			
 		s=''
-		line1=self.model+'.inp\n'
+		line1=self.name_soft+'/Files_HypDD/'+self.model+'.inp\n'
 		s+=line1
 		print s	
 
 		out = p.communicate( s )
 		print out	
+
+
+	def Menu_cc(self):
+		self.root13 = Tk()
+		self.root13.geometry("400x400")
+		#self.root.config(width=300, height=100)
+		self.root13.title("using settings with con file dt.cc")
+		#INPUT=""     
+
+		 
+		self.Display = Button(self.root13, height = 2,
+		                 width = 40,
+		                 text ="Yes",
+		                 command = lambda:self.file_cc_yes())
+
+		self.Display2 = Button(self.root13, height = 2,
+		                 width = 40,
+		                 text ="Not",
+		                 command = lambda:self.file_cc_not())
+
+		#self.inputtxt.pack()
+		self.Display.pack()
+		self.Display2.pack()
+
+		mainloop()
+	def file_cc_yes(self):
+		self.root13.destroy()
+		Tipo="Select file with dt.cc"
+		self.file_cc=inicio_rutas.main(Tipo)
+		self.opc_cc=1
+		self.Menu_IDAT()
+	def file_cc_not(self):
+		self.root13.destroy()
+		self.opc_cc=0
+		self.Menu_IDAT()
+
+
+	def Menu_IDAT(self):
+		self.root14 = Tk()
+		self.root14.geometry("400x400")
+		#self.root.config(width=300, height=100)
+		self.root14.title("Select option for IDAT")
+		#INPUT=""     
+
+		 
+		self.Display = Button(self.root14, height = 2,
+		                 width = 40,
+		                 text ="0 = synthetics;",
+		                 command = lambda:self.settings_idat(opc=0))
+
+		self.Display1 = Button(self.root14, height = 2,
+		                 width = 40,
+		                 text ="1= cross corr",
+		                 command = lambda:self.settings_idat(opc=1))
+		self.Display2 = Button(self.root14, height = 2,
+		                 width = 40,
+		                 text ="2= catalog",
+		                 command = lambda:self.settings_idat(opc=2))
+		self.Display3 = Button(self.root14, height = 2,
+		                 width = 40,
+		                 text ="3= cross & cat",
+		                 command = lambda:self.settings_idat(opc=3))
+
+		#self.inputtxt.pack()
+		self.Display.pack()
+		self.Display1.pack()
+		self.Display2.pack()
+		self.Display3.pack()
+
+		mainloop()
+
+	def settings_idat(self, opc):
+		self.opc_idat=str(opc)
+		self.root14.destroy()
+		self.Menu_IPHA()
+
+	def Menu_IPHA(self):
+		self.root15 = Tk()
+		self.root15.geometry("400x400")
+		#self.root.config(width=300, height=100)
+		self.root15.title("Select option for IDAT")
+		#INPUT=""     
+
+		 
+		self.Display = Button(self.root15, height = 2,
+		                 width = 40,
+		                 text ="1 = p",
+		                 command = lambda:self.settings_ipha(opc=1))
+
+		self.Display1 = Button(self.root15, height = 2,
+		                 width = 40,
+		                 text ="2= s",
+		                 command = lambda:self.settings_ipha(opc=2))
+		self.Display2 = Button(self.root15, height = 2,
+		                 width = 40,
+		                 text ="3= p & s",
+		                 command = lambda:self.settings_ipha(opc=3))
+
+
+		#self.inputtxt.pack()
+		self.Display.pack()
+		self.Display1.pack()
+		self.Display2.pack()
+
+
+		mainloop()
+
+	def settings_ipha(self, opc):
+		self.opc_ipha=str(opc)
+		self.root15.destroy()
+		self.create_file_continue()
+
+
 	def create_file(self):
 		inicio_ruta_dir=Rutas_Dir()
 		Tipo="path salve archivo .inp"
-		path_create_file=inicio_ruta_dir.pathfile(Tipo)
+		self.path_create_file=inicio_ruta_dir.pathfile(Tipo)
+		Tipo="Select file with dt.ct"
+		inicio_rutas=Rutas()
+		self.files_ct=inicio_rutas.main(Tipo)
+		print "---+++++++++++",self.files_ct
+		self.Menu_cc()
+	def create_file_continue(self):
+		#self.Menu_IDAT()
+
+		#self.Menu_IPHA()
+
+
 
 		self.name_salve_file=(os.path.abspath(os.getcwd()))
+		self.sta_dat=self.name_salve_file+'/Files_HypDD/'+self.model+'_sta.dat'
+		self.data_dat=self.name_salve_file+'/Files_HypDD/'+self.model+'.dat'
 		datos_model=self.Lectura_file()
 		for m in range(2):
 
 			if m==0:
 
-				fo = open(path_create_file+'/'+self.model+'.inp', 'w')
+				fo = open(self.path_create_file+'/'+self.model+'.inp', 'w')
 			else:
-				fo = open(self.name_salve_file+'/'+self.model+'.inp', 'w')
+				fo = open(self.name_salve_file+'/Files_HypDD/'+self.model+'.inp', 'w')
 			fo.write("* RELOC.INP:\n")
 			fo.write("*--- input file selection\n")
 			fo.write("* cross correlation diff times: (not used in this test)\n")
-			fo.write("#dt.cc\n")
+			if self.opc_cc==1:
+				fo.write(self.files_cc+"\n")
+			else:
+				fo.write("#dt.cc\n")
+
+
+			
 			fo.write("*\n")
 			fo.write("*catalog P & S diff times:\n")
-			fo.write("dt.ct\n")
+			fo.write(self.files_ct+"\n")
 			fo.write("*\n")
 			fo.write("* event file:\n")
-			fo.write(self.model+".dat\n")
+			fo.write(self.data_dat+"\n")
 			fo.write("*\n")
 			fo.write("* station file:\n")
-			fo.write("codex_s.dat\n")
+			fo.write(self.sta_dat+"\n")
 			fo.write("*\n")
 			fo.write("*--- output file selection\n")
 			fo.write("* original locations:\n")
-			fo.write(path_create_file+"/"+self.model+".loc\n")
+			fo.write(self.path_create_file+"/"+self.model+".loc\n")
 			fo.write("* relocations:\n")
-			fo.write(path_create_file+"/"+self.model+".reloc\n")
+			fo.write(self.path_create_file+"/"+self.model+".reloc\n")
 			fo.write("* station information:\n")
-			fo.write(path_create_file+"/"+self.model+".sta\n")
+			fo.write(self.path_create_file+"/"+self.model+".sta\n")
 			fo.write("* residual information:\n")
 			fo.write("*"+self.model+".res\n")
 			fo.write("\n")
@@ -340,7 +484,7 @@ class file_hypodd():
 			fo.write("* IPHA: 1= P; 2= S; 3= P&S\n")
 			fo.write("* DIST:max dist [km] between cluster centroid and station \n")
 			fo.write("* IDAT   IPHA   DIST\n")
-			fo.write("    2     1     400\n")
+			fo.write("    "+self.opc_idat+"     "+self.opc_ipha+"     400\n")
 			fo.write("*\n")
 			fo.write("*--- event clustering:\n")
 			fo.write("* OBSCC:    min # of obs/pair for crosstime data (0= no clustering)\n")

@@ -12,6 +12,7 @@ from option_multiple import *
 
 
 
+
 		
 
 
@@ -42,9 +43,9 @@ class Principal:
 	def Re_localizacion(self):
 		print ':) ****'
 		self.root0.destroy()	
-		inicio=file_hypodd()
-		inicio.main()
-
+		inicio_file_hypoDD=file_hypodd()
+		inicio_file_hypoDD.main()
+		self.MenuPrincipal()
 	def Magnitud_Coda(self):
 		print ':)  *******'
 		self.root0.destroy()	
